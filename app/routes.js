@@ -17,7 +17,7 @@ module.exports = function(app, passport) {
 	});
 
 	app.get('/profile', function(req, res) {
-		res.render('signup.ejs', { 
+		res.render('profile.ejs', { 
 			user: req.user 
 		});
 	});
@@ -26,5 +26,12 @@ module.exports = function(app, passport) {
 		res.logout();
 		res.redirect('/');
 	});
+
+	function isLoggedIn(req, res, next) {
+		if(req.isAuthenticated())
+			return next();
+
+		res.redirect('/');
+	}
 
 };
