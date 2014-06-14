@@ -1,10 +1,12 @@
 var mongoose = require('mongoose');
 var bycrypt = require('bycrypt-nodejs');
 
-var UserSchema = mongoose.Schema({
+var Schema = mongoose.Schema;
+
+var UserSchema = new Schema({
 	local : {
 		email : String,
-		passpwrd : String
+		passpword : String
 	},
 	facebook : {
 		id : String,
@@ -26,3 +28,13 @@ var UserSchema = mongoose.Schema({
 		userName : String
 	} 
 });
+
+UserSchema.methods.generateHash = function(passpword) {
+	return bycrypt.hashSync(passpword, bycrypt.genSaltSync(8), null);
+};
+
+UserSchema.methods.validPassord = function(passpword) {
+	return bycrypt.compareSync(passpword, this.local.password);
+};
+
+mongoose.exports = mongoose.model('User', UserSchema);
