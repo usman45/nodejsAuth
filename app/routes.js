@@ -1,20 +1,12 @@
 module.exports = function(app, passport, auth) {
 
-	app.get('/', function(req, res) {
-		res.render('index.ejs');
-	});
+	var users = require('./controllers/users');
 
-	app.get('/login', function(req, res) {
-		res.render('login.ejs', { 
-			message: req.flash('loginMessage') 
-		});
-	});
+	app.get('/', users.homePage);
 
-	app.get('/signup', function(req, res) {
-		res.render('signup.ejs', { 
-			message: req.flash('signupMessage') 
-		});
-	});
+	app.get('/login', users.login);
+
+	app.get('/signup', users.signup);
 
 	app.get('/profile', function(req, res) {
 		res.render('profile.ejs', { 
