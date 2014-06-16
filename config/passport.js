@@ -2,8 +2,10 @@ var LocalStrategy = require('passport-local').Strategy;
 
 var User =  require('../app/models/user');
 
-modeule.exports = function(passprt) {
-	passprt.serializeUser(function(user, done) {
+//var User = require('mongoose').model('User');
+
+module.exports = function(passport) {
+	passport.serializeUser(function(user, done) {
 		done(null, user.id);
 	});
 
@@ -17,7 +19,7 @@ modeule.exports = function(passprt) {
 	passport.use('local-signup', new LocalStrategy(
 		{
 			usernameField : 'email',
-			passwordField : 'password'
+			passwordField : 'password',
 			passReqToCallback : true	
 		},
 		function(req, email, password, done) {
