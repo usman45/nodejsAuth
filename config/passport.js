@@ -20,7 +20,7 @@ module.exports = function(passport) {
 		{
 			clientID : configAuth.facebookAuth.clientID,
 			clientSecret : configAuth.facebookAuth.clientSecret,
-			callbackURL : configAuth.facebookAuth.callbackURL	
+			callbackURL : configAuth.facebookAuth.callbackURL
 		},
 		function(token, refreshToken, profile, done) {
 			process.nextTick(function() {
@@ -29,7 +29,7 @@ module.exports = function(passport) {
 						return done(err);
 
 					if(user) {
-						return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+						return done(null, user);
 					} else {
 						//add new user to the model alongwith attributes
 						var newUser = new User();
