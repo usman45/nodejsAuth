@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var bycrypt = require('bycrypt-nodejs');
+var bcrypt   = require('bcrypt-nodejs');
 
 var Schema = mongoose.Schema;
 
@@ -37,4 +37,4 @@ UserSchema.methods.validPassord = function(passpword) {
 	return bycrypt.compareSync(passpword, this.local.password);
 };
 
-mongoose.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema);
