@@ -1,4 +1,4 @@
-module.exports = function(app, passport) {
+module.exports = function(app, passport, auth) {
 
 	app.get('/', function(req, res) {
 		res.render('index.ejs');
@@ -23,7 +23,7 @@ module.exports = function(app, passport) {
 	});
 
 	app.get('/logout', function(req, res) {
-		res.logout();
+		req.logout();
 		res.redirect('/');
 	});
 
@@ -33,15 +33,6 @@ module.exports = function(app, passport) {
 		successRedirect : 'profile',
 		failureRedirect : '/'
 	}));
-
-
-	//middleware
-	function isLoggedIn(req, res, next) {
-		if(req.isAuthenticated())
-			return next();
-
-		res.redirect('/');
-	}
 
 	// process the signup form
 	app.post('/signup', passport.authenticate('local-signup', {
