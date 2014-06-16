@@ -9,7 +9,7 @@ var configDB = require('./config/database.js');
 
 mongoose.connect(configDB.db);
 
-// require('./config/passport')(passport); // pass passport for configuration
+require('./config/passport')(passport); // pass passport for configuration
 
 app.configure(function() {
 
