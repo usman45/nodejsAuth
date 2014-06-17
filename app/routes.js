@@ -1,5 +1,6 @@
 module.exports = function(app, passport, auth) {
 
+	var authe = require('../config/middleware.js');
 	var users = require('./controllers/users');
 
 	app.get('/', users.homePage);
@@ -8,11 +9,7 @@ module.exports = function(app, passport, auth) {
 
 	app.get('/signup', users.signup);
 
-	app.get('/profile', function(req, res) {
-		res.render('profile.ejs', { 
-			user: req.user 
-		});
-	});
+	app.get('/profile', authe.isLoggedIn, users.userProfile);
 
 	app.get('/logout', function(req, res) {
 		req.logout();
