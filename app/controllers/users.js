@@ -13,3 +13,9 @@ exports.signup = function(req, res) {
 		message : req.flash('signupMessage')
 	});
 }
+
+exports.userProfile = function(req, res) {
+	res.render('profile.ejs', { 
+		user: req.user 
+	});
+}
