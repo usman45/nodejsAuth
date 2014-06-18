@@ -1,21 +1,21 @@
 exports.homePage = function(req, res) {
-	res.render('index.ejs');
+	res.render('users/index.ejs');
 }
 
 exports.login = function(req, res) {
-	res.render('login.ejs', {
+	res.render('users/login.ejs', {
 		message : req.flash('loginMessage')
 	});
 }
 
 exports.signup = function(req, res) {
-	res.render('signup.ejs', {
+	res.render('users/signup.ejs', {
 		message : req.flash('signupMessage')
 	});
 }
 
 exports.userProfile = function(req, res) {
-	res.render('profile.ejs', { 
+	res.render('users/profile.ejs', { 
 		user: req.user // get the user out of session and pass to template
 	});
 }
