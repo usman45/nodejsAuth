@@ -4,25 +4,19 @@ module.exports = function(app, passport, auth) {
 	var users = require('./controllers/users');
 
 	app.get('/', users.homePage);
-
 	app.get('/login', users.login);
-
 	app.get('/signup', users.signup);
-
 	app.get('/profile', authe.isLoggedIn, users.userProfile);
+	app.get('/logout', users.logout);
 
-	app.get('/logout', function(req, res) {
-		req.logout();
-		res.redirect('/');
-	});
-
+	
 	app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
-
 	app.get('/auth/facebook/callback', passport.authenticate('facebook',{
 		successRedirect : 'profile',
 		failureRedirect : '/'
 	}));
 
+	
 	// process the signup form
 	app.post('/signup', passport.authenticate('local-signup', {
 		successRedirect : '/profile', // redirect to the secure profile section
