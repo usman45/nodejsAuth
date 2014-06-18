@@ -8,7 +8,7 @@ module.exports = function(app, passport, auth) {
 	app.get('/', users.homePage);
 	app.get('/login', users.login);
 	app.get('/signup', users.signup);
-	app.get('/profile', authe.isLoggedIn, users.userProfile);
+	app.get('/profile', authe.isLoggedIn, users.userProfile); // we will use route middleware to verify this (the isLoggedIn function)
 	app.get('/logout', users.logout);
 
 	

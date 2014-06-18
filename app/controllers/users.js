@@ -16,7 +16,7 @@ exports.signup = function(req, res) {
 
 exports.userProfile = function(req, res) {
 	res.render('profile.ejs', { 
-		user: req.user 
+		user: req.user // get the user out of session and pass to template
 	});
 }
 
