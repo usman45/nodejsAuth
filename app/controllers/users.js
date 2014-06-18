@@ -19,3 +19,8 @@ exports.userProfile = function(req, res) {
 		user: req.user 
 	});
 }
+
+exports.logout = function(req, res) {
+	req.logout();
+    res.redirect('/');
+}
