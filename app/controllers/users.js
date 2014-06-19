@@ -1,5 +1,5 @@
 exports.homePage = function(req, res) {
-	res.render('users/index.ejs');
+	res.render('users/');
 }
 
 exports.login = function(req, res) {
