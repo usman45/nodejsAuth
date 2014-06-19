@@ -1,10 +1,46 @@
 var mongoose = require('mongoose');
 var bycrypt   = require('bcrypt-nodejs');
 
+/**
+* Validations
+*/
+ var validatePresenceOf = function(value) {
+     // If you are authenticating by any of the oauth strategies, don't validate.
+     return (this.provider && this.provider !== 'local') || (value && value.length);
+ };
+
 var UserSchema =  mongoose.Schema({
 	local : {
-		email : String,
-		password : String
+		name: {
+	        type: String,
+	        //required: true
+	    },
+	    password: {
+	        type: String,
+	        required: true
+	    },
+	    email: {
+	        type: String,
+	        required: true,
+	        match: [/.+\@.+\..+/, 'Please enter a valid email'],
+	    },
+	    username: {
+	        type: String,
+	        unique: true,
+	        //required: true
+	    },
+	    roles: {
+	        type: Array,
+	        default: ['authenticated']
+	    },
+	    hashed_password: {
+	        type: String,
+	        validate: [validatePresenceOf, 'Password cannot be blank']
+	    },
+	    provider: {
+	        type: String,
+	        default: 'local'
+	    },
 	},
 	facebook : {
 		id : String,
