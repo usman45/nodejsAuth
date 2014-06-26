@@ -10,6 +10,7 @@ module.exports = function(app, passport, auth) {
 	app.get('/signup', users.signup);
 	app.get('/profile', authe.isLoggedIn, users.userProfile); // we will use route middleware to verify this (the isLoggedIn function)
 	app.get('/logout', users.logout);
+	app.get('/default', users.render);
 
 	
 	// authenticate me via facebook, here are my requests
@@ -27,9 +28,9 @@ module.exports = function(app, passport, auth) {
 		failureFlash : true // allow flash messages
 	}));
 
-	// process the signup form
+	// process the login form
 	app.post('/login', passport.authenticate('local-login', {
-		successRedirect : '/profile', // redirect to the secure profile section
+		successRedirect : '/default', // redirect to the secure profile section
 		failureRedirect : '/login', // redirect back to the signup page if there is an error
 		failureFlash : true // allow flash messages
 	}));
