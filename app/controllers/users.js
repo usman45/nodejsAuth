@@ -24,3 +24,7 @@ exports.logout = function(req, res) {
 	req.logout();
     res.redirect('/');
 }
+
+exports.render = function(req, res) {
+    res.render('users/default');
+};
